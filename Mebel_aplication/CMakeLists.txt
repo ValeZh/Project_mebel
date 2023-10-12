@@ -23,6 +23,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Mebel_aplication
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        main_page.h main_page.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Mebel_aplication APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
