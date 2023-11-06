@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>signupwindow</class>
+ <widget class="QDialog" name="signupwindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>402</width>
+    <height>429</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QGroupBox" name="SignUpGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>50</y>
+     <width>311</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="NameLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ім'я</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="PasswordLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>57</y>
+      <width>42</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Пароль</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="PhoneNumberLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>82</y>
+      <width>94</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Номер телефону</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>91</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Дата народження</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="DateOfBirthEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>140</y>
+      <width>75</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NameLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>20</y>
+      <width>181</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>206</width>
+      <height>16777215</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="PhoneNumberLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>119</x>
+      <y>82</y>
+      <width>181</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ConfirmPushButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>240</y>
+      <width>281</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Підтвердить</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="PasswordLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>50</y>
+      <width>181</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

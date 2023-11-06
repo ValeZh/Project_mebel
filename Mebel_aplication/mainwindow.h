@@ -26,6 +26,8 @@ public:
     float price;
     QString shop;
     QString articul;
+    QString picture_path;
+    QImage image;
 
     QVBoxLayout *layout;
     QLabel *name;
@@ -33,10 +35,11 @@ public:
     QLabel *articul1;
     QLabel *shop1, *picture;
     QPushButton *buy;
-    QPixmap pixmap;
+    QPixmap pixmap1;
+
     QWidget* widget = new QWidget();
 
-    Product(QWidget* parent,QString prod_name, float pric,QString artic,QString sh);
+    Product(QWidget* parent, QString prod_name, float pric, QString artic, QString sh, QString picpat);
 
     ~Product(){}
 
@@ -68,19 +71,27 @@ public:
     QScrollArea *scrol;
 
     QSqlDatabase myDB;
-
-
-
-    //QPixmap pixmap;
+    int user_id;
 
     void makeProductWindow(QString product_name, QString price,QString articul,QString shop, int i);
     void openImage();
-    void drawImage(QLabel *label, QPixmap pixmap);
+
+    void fillwithproducts();
+    void open_bd();
 
 public slots:
 
 signals:
     void signal1();
+
+private slots:
+    void on_signUp_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_addProdButt_clicked();
+
+    void on_addShopBut_clicked();
 
 private:
     Ui::MainWindow *ui;

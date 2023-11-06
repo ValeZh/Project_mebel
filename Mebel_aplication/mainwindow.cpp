@@ -3,19 +3,26 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <iostream>
+#include "./vitalikSign_up/signupwindow.h"
+#include "./maratCart/widget.h"
+#include "addprod.h"
+#include "addshop.h"
 
+QList<QString> artprod;
 
-Product::Product(QWidget* parent,QString prod_name, float pric,QString artic,QString sh) : QWidget(parent)
+Product::Product(QWidget* parent,QString prod_name, float pric,QString artic,QString sh, QString picpat) : QWidget(parent)
 {
     product_name = prod_name;
     price = pric;
     articul = artic;
     shop = sh;
+    picture_path = picpat;
     MakeProduct(parent);
 }
 
 void Product::MakeProduct(QWidget* parent)
 {
+    this ->setFixedWidth(400);
     buy = new QPushButton(this);
     buy ->setText("buy");
 
@@ -32,11 +39,13 @@ void Product::MakeProduct(QWidget* parent)
     shop1 = new QLabel(parent);
     shop1 -> setObjectName("shop1");
     shop1  -> setText(shop);
+
     picture = new QLabel(parent);
     picture -> setObjectName("picture ");
-    picture->setGeometry(100, 100,300, 300);
-    pixmap = QPixmap(picture->size());
-    drawImage(picture,pixmap);
+    picture->setGeometry(100, 100,400, 300);
+    pixmap1 = QPixmap(picture->size());
+
+    drawImage(picture,pixmap1);
     layout = new QVBoxLayout(parent);
     layout ->addWidget(picture);
     layout ->addWidget(name);
@@ -49,22 +58,24 @@ void Product::MakeProduct(QWidget* parent)
     connect(buy,SIGNAL(clicked()),this,SLOT(show_but()));
 }
 
+
 void Product::drawImage(QLabel *label, QPixmap pixmap)
 {
     QImage image;
-    QString fileName = QFileDialog::getOpenFileName(this,"Open the file");
-    image.load(fileName);
+    image.load(picture_path);
     pixmap = QPixmap::fromImage(image);
     label->setPixmap(pixmap.scaled(label->size()));
 }
 
+
 void Product::show_but()
 {
-        QMessageBox *qa;
-        qa = new QMessageBox(this);
+    QMessageBox *qa;
+    qa = new QMessageBox(this);
 
-        qa->setText(shop);
-        qa->show();
+    qa->setText(shop);
+    qa->show();
+    artprod.append(shop);
 }
 
 
@@ -73,38 +84,100 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    myDB = QSqlDatabase::addDatabase("QSQLITE");
-    QString pathToDB = QString("D:/Learning_2kurs/Project_mebel") + QString("/cursova.db");
-
-    productgrid = new QGridLayout();
-    productwidg = new QWidget();
-    //записывать кнопки в кулист
-    //записывать айди в ку лист
-
-    int i = 0;
-    for(i = 0;i<3;i++)
-    {
-        for(int k = 0; k<3;k++)
-        {
-            QWidget* widget45 = new QWidget();
-
-            Product *pr;
-            pr = new Product(widget45,"Stol",23.45,"fiewgfie",QString("shop"+ QString::number(i)));
-            productgrid->addWidget(pr, k, i);
-        }
-    }
-
-    productwidg->setLayout(productgrid);
-    ui->scrollArea->setWidget(productwidg);
-
+    open_bd();
+    fillwithproducts();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    myDB.close();
+}
+
+void MainWindow::fillwithproducts()
+{
+    QSqlQuery query;
+    query.prepare("SELECT id_product, product_name, price, articul, shop_name FROM shop_product INNER JOIN product_table ON shop_product.id_product = product_table.id INNER JOIN shop_table ON shop_product.id_shop = shop_table.id");
+
+    productgrid = new QGridLayout();
+    productwidg = new QWidget();
+
+    if(query.exec())
+    {
+        std::cout<<"DB connection success SET PRODUCTS"<<std::endl;
+        std::cout<<query.size()<<std::endl;
+        int i = 0;
+        int k = 0;
+        while(query.next())
+        {
+
+            QWidget* widget45 = new QWidget();
+            QString pic_path = "D://Learning_2kurs//Project_mebel//Mebel_aplication//pictures//" +
+                               QString::number(query.value(0).toInt()) + ".jpg";
+            QString name = query.value(1).toString();
+            float price = query.value(2).toFloat();
+            QString articul = query.value(3).toString();
+            QString shopw = query.value(4).toString();
+            Product *pr;
+            pr = new Product(widget45,name,price,articul,shopw,pic_path);
+            productgrid->addWidget(pr, k, i);
+            i++;
+            if(i==3)
+            {
+                k = k  + 1;
+                i = 0;
+            }
+        }
+    }
+    else
+    {
+        std::cout<<"DB connection NOT success SET PRODUCTS"<<std::endl;
+    }
+
+    productwidg->setLayout(productgrid);
+    ui->scrollArea->setWidget(productwidg);
+}
+
+void MainWindow::open_bd()
+{
+    myDB = QSqlDatabase::addDatabase("QSQLITE");
+    myDB.setDatabaseName("D:/Learning_2kurs/Project_mebel/cursova.db");
+
+    // Перевірка на успішне відкриття бази даних
+    if (!myDB.open()) {
+        QMessageBox::critical(this, "Помилка", "Не вдалося відкрити базу даних");
+        return;
+    }
+}
+
+void MainWindow::on_signUp_clicked()
+{
+    signupwindow signwindow;
+
+    signwindow.setModal(true);
+    signwindow.exec();
+    user_id = signwindow.user_id;
 }
 
 
+void MainWindow::on_pushButton_6_clicked()
+{
+    Widget r;
+}
 
 
+void MainWindow::on_addProdButt_clicked()
+{
+    AddProd prodw;
+    prodw.setModal(true);
+    prodw.exec();
+}
+
+
+void MainWindow::on_addShopBut_clicked()
+{
+    AddShop shopw;
+    shopw.setModal(true);
+    shopw.exec();
+}
 
