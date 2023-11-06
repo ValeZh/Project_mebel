@@ -1,0 +1,21 @@
+    //void set_shopsCB();
+/*
+void MainWindow::set_shopsCB()
+{
+    QSqlQuery query;
+    query.prepare("SELECT shop_name FROM shop_table;");
+    if(query.exec())
+    {
+        std::cout<<"DB connection success YYYYYY"<<std::endl;
+        ui->shopCB->addItem("All Shops");
+        while(query.next())
+        {
+            ui->shopCB->addItem(QString(query.value(0).toString()));
+        }
+    }
+    else
+    {
+        std::cout<<"DB connection not success"<<std::endl;
+    }
+}
+*/

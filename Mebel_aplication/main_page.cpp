@@ -9,6 +9,4 @@ Main_page::Main_page(QWidget *parent)
     trybutton -> setSizeIncrement(100,100);
     trybutton -> move(50,90);
     trybutton -> setText("SVKGVSDIGBDUIEFVG");
-
-
 }

@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPushButton>
 
+
+
 class Main_page : public QWidget
 {
     Q_OBJECT
@@ -12,6 +14,7 @@ public:
 
 private:
     QPushButton *trybutton;
+
 
 signals:
 
