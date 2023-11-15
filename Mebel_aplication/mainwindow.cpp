@@ -4,7 +4,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include "./vitalikSign_up/signupwindow.h"
-#include "./maratCart/widget.h"
+#include "./maratCart/cart.h"
 #include "addprod.h"
 #include "addshop.h"
 
@@ -163,6 +163,8 @@ void MainWindow::on_signUp_clicked()
 void MainWindow::on_pushButton_6_clicked()
 {
     Widget r;
+    r.setModal(true);
+    r.exec();
 }
 
 
