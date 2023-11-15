@@ -6,6 +6,7 @@ Widget::Widget(QWidget *parent)
     int whatnow = 0;
     makeBasket();
     connect(button1, &QPushButton::clicked, this, &Widget::buySlot);
+
 }
 
 Widget::~Widget()
@@ -30,7 +31,7 @@ void Widget::makeBasket()
 
     CartLayout2 = new QVBoxLayout();
     wdg2->setLayout(CartLayout2); //лєаут для скроларєї
-
+    
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("D:/Learning_2kurs/Project_mebel/cursova.db");
     // Перевірка на успішне відкриття бази даних

@@ -12,6 +12,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGridLayout>
+
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QSpinBox>
@@ -29,6 +30,7 @@ public:
     int quantity;
 
     QHBoxLayout *LShipment1;
+
     QLabel *label;
     QLabel *shipmentlabel1;
     QPixmap *shipment1;
