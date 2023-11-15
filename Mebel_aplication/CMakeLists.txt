@@ -31,10 +31,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         vitalikSign_up/signupwindow.h
         vitalikSign_up/signupwindow.cpp
         vitalikSign_up/signupwindow.ui
-        maratCart/widget.h
-        maratCart/widget.cpp
+        maratCart/cart.h
+        maratCart/cart.cpp
         addprod.h addprod.cpp addprod.ui
         addshop.h addshop.cpp addshop.ui
+
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -1,7 +1,8 @@
-#ifndef WIDGET_H
-#define WIDGET_H
+#ifndef CART_H
+#define CART_H
 
 #include <QWidget>
+#include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -12,7 +13,47 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 
-class Widget : public QWidget
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QSpinBox>
+#include <QMessageBox>
+
+class  CartItem: public QWidget
+{
+    Q_OBJECT
+
+public:
+
+    QString product_name;
+    float price;
+    QString picture_id;
+    int quantity;
+
+    QHBoxLayout *LShipment1;
+
+    QLabel *label;
+    QLabel *shipmentlabel1;
+    QPixmap *shipment1;
+    QPushButton *button;
+    QLineEdit *textedit;
+    QSpinBox *spinbox;
+
+    QWidget* widget09 = new QWidget();
+
+    CartItem(QWidget* parent, QString prod_name, QString pic_id, int quant);
+
+    ~CartItem(){}
+
+    void makeItem(QWidget* parent, QString prod_name, QString pic_id, int quant);
+
+public slots:
+    void delSlot();
+    void SpinboxSlot();
+};
+
+//----------------------------------------------------------------------------------
+
+class Widget : public QDialog
 {
     Q_OBJECT
 
@@ -20,24 +61,22 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
+
     QGridLayout *layout;
-    QHBoxLayout *LShipment1;
     QLabel *Cardlabel;
-    QLabel *label;
-    QLabel *shipmentlabel1;
-    QPixmap *shipment1;
-    QPushButton *button;
-    QPushButton *button1;
-    QLineEdit *textedit;
     QVBoxLayout *CartLayout;
     QVBoxLayout *CartLayout2;
     QScrollArea *CartScroll;
+    QSqlDatabase db;
+    QPushButton *button1;
+
+    int whatnow;
     void makeBasket();
-    //та я хрін його знає чо їх так багато
 private:
 
-private slots:
-    //void ClickedSlot();
-    void EndSlot();
+public slots:
+    void buySlot();
 };
-#endif // WIDGET_H
+
+
+#endif // CART_H
