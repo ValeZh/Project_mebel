@@ -1,22 +1,27 @@
 #ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "main_page.h"
-
 #include <QLabel>
 #include <QDockWidget>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QFrame>
 #include <QGridLayout>
 #include <QScrollArea>
 #include <QtSql>
+#include <QPushButton>
+#include <QShortcut>
+
+#define DB_PATH "D:/Learning_2kurs/Project_mebel/cursova.db"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 
-class  Product: public QWidget
+class  Product: public QFrame
 {
     Q_OBJECT
 
@@ -27,9 +32,10 @@ public:
     QString shop;
     QString articul;
     QString picture_path;
+    QString guid;
     QImage image;
 
-    QVBoxLayout *layout;
+    QVBoxLayout *layout,*mainlayout;
     QLabel *name;
     QLabel *price1;
     QLabel *articul1;
@@ -37,23 +43,21 @@ public:
     QPushButton *buy;
     QPixmap pixmap1;
 
-    QWidget* widget = new QWidget();
-
     Product(QWidget* parent, QString prod_name, float pric, QString artic, QString sh, QString picpat);
 
     ~Product(){}
 
+    void setStyle();
     void MakeProduct(QWidget* parent);
     void drawImage(QLabel *label, QPixmap pixmap);
 
 public slots:
-    void show_but();
+    void add_basket();
 };
 
 
 
 class MainWindow : public QMainWindow
-#define MAINWINDOW_HainWindow
 {
     Q_OBJECT
 
@@ -61,17 +65,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    Main_page *r;
-
-    QMap<int,QLabel> butData;
-
     QDockWidget *productwindow;
     QWidget *productwidg;
     QGridLayout *productgrid;
     QScrollArea *scrol;
 
     QSqlDatabase myDB;
-    int user_id;
 
     void makeProductWindow(QString product_name, QString price,QString articul,QString shop, int i);
     void openImage();
@@ -79,24 +78,25 @@ public:
     void fillwithproducts();
     void open_bd();
 
-public slots:
-
-signals:
-    void signal1();
-
 private slots:
     void on_signUp_clicked();
 
-    void on_pushButton_6_clicked();
+    void on_basket_clicked();
 
     void on_addProdButt_clicked();
 
     void on_addShopBut_clicked();
 
+    void on_login_clicked();
+
+    void on_acount_clicked();
+
+    void give_admin();
+
 private:
     Ui::MainWindow *ui;
 
-    void BrowseChildren( QObject * parent );
+    QShortcut       *keyAdmin;
 };
 
 #endif // MAINWINDOW_H

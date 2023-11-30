@@ -1,9 +1,5 @@
 #include "cart.h"
 #include "D:/Learning_2kurs/Project_mebel/Mebel_aplication/mycash.h"
-#include "qsqlerror.h"
-#include <iostream>
-#include <ostream>
-
 
 Widget::Widget(QWidget *parent)
     : QDialog(parent)
@@ -74,45 +70,39 @@ void Widget::buySlot() //Слот покупки
     QDateTime date = QDateTime::currentDateTime();
 
     float boughtthisyear = 0.0; //Сума покупок клієнта у цьому році
-    QSqlQuery query1;
-    query1.prepare("SELECT SUM(products.price*order_items.quantity) FROM products, order_items WHERE order_items.product_guid = products.guid AND order_items.user_id = ? AND order_items.year = ?");
-    query1.addBindValue(MyCash::get_user_id());
-    query1.addBindValue(date.date().year());
-    if(query1.exec())
+    QSqlQuery query3;
+    query3.prepare("SELECT SUM(products.price*order_items.quantity) FROM products, order_items WHERE order_items.product_guid = products.guid AND order_items.user_id = ? AND order_items.year = ?");
+    query3.addBindValue(MyCash::get_user_id());
+    query3.addBindValue(date.date().year());
+    if(query3.exec())
     {
         qDebug("Counting ordered sum...");
-        while(query1.next())
+        while(query3.next())
         {
-            boughtthisyear += query1.value(0).toFloat(); //Формування суми покупок у цьому році
+            boughtthisyear += query3.value(0).toFloat(); //Формування суми покупок у цьому році
         }
-        std::cout<<boughtthisyear<<std::endl;
-    }
-    else
-    {
-        QMessageBox::critical(this, "Помилка", query1.lastError().text());
-        return;
     }
 
-    QSqlQuery query2; //Додавання заказу
-    query2.prepare("INSERT INTO order_items(user_id, product_guid, quantity, year, month, day) SELECT user_id, product_guid, quantity, ? AS year, ? AS month, ? AS day FROM basket WHERE basket.user_id = ?");
-    query2.addBindValue(date.date().year());
-    query2.addBindValue(date.date().month());
-    query2.addBindValue(date.date().day());
+    QSqlQuery query; //Додавання заказу
+    query.prepare("INSERT INTO order_items(user_id, product_guid, quantity, year, month, day) SELECT user_id, product_guid, quantity, ? AS year, ? AS month, ? AS day FROM basket WHERE basket.user_id = ?");
+    query.addBindValue(date.date().year());
+    query.addBindValue(date.date().month());
+    query.addBindValue(date.date().day());
+    query.addBindValue(MyCash::get_user_id());
+    query.exec();
+
+    QSqlQuery query2; //Отримання товарів з корзини на момент покупки
+    query2.prepare("SELECT quantity, products.price FROM basket, products WHERE basket.product_guid = products.guid AND basket.user_id = ?");
     query2.addBindValue(MyCash::get_user_id());
-    query2.exec();
-
-    QSqlQuery query3; //Отримання товарів з корзини на момент покупки
-    query3.prepare("SELECT quantity, products.price FROM basket, products WHERE basket.product_guid = products.guid AND basket.user_id = ?");
-    query3.addBindValue(MyCash::get_user_id());
 
     float wholeprice = 0.0; //Сума всіх товарів з корзини
 
-    if(query3.exec())
+    if(query2.exec())
     {
         qDebug("click");
-        while(query3.next())
+        while(query2.next())
         {
-            float priceofshipnow = query3.value(0).toFloat() * query3.value(1).toFloat();
+            float priceofshipnow = query2.value(0).toFloat() * query2.value(1).toFloat();
             wholeprice += priceofshipnow; //Формування суми
             QSqlQuery queryprice1;
             queryprice1.prepare("SELECT id FROM order_items WHERE price IS NULL LIMIT 1");
@@ -147,34 +137,6 @@ void Widget::buySlot() //Слот покупки
     if (boughtthisyear >= 300000.0) //Знижка
     {
         wholeprice = wholeprice*0.90;
-    }
-    else if (boughtthisyear >= 150000.0)
-    {
-        wholeprice = wholeprice*0.95;
-    }
-
-    boughtthisyear = 0.0;
-    QSqlQuery queryagain;
-    queryagain.prepare("SELECT SUM(products.price*order_items.quantity) FROM products, order_items WHERE order_items.product_guid = products.guid AND order_items.user_id = ? AND order_items.year = ?");
-    queryagain.addBindValue(MyCash::get_user_id());
-    queryagain.addBindValue(date.date().year());
-    if(queryagain.exec())
-    {
-        qDebug("Counting ordered sum... Again");
-        while(queryagain.next())
-        {
-            boughtthisyear += queryagain.value(0).toFloat(); //Формування суми покупок у цьому році
-        }
-        std::cout<<boughtthisyear<<std::endl;
-    }
-    else
-    {
-        QMessageBox::critical(this, "Помилка", query1.lastError().text());
-        return;
-    }
-
-    if (boughtthisyear >= 300000.0) //Знижка
-    {
         QSqlQuery queryprocent;
         queryprocent.prepare("UPDATE users SET procent_of_sale = 10 WHERE id = ?");
         queryprocent.addBindValue(MyCash::get_user_id());
@@ -182,6 +144,7 @@ void Widget::buySlot() //Слот покупки
     }
     else if (boughtthisyear >= 150000.0)
     {
+        wholeprice = wholeprice*0.95;
         QSqlQuery queryprocent;
         queryprocent.prepare("UPDATE users SET procent_of_sale = 5 WHERE id = ?");
         queryprocent.addBindValue(MyCash::get_user_id());
@@ -195,11 +158,6 @@ void Widget::buySlot() //Слот покупки
         queryprocent.exec();
     }
 
-    QSqlQuery query4;
-    query4.prepare("UPDATE users SET spend_money = spend_money + ? WHERE id = ?");
-    query4.addBindValue(wholeprice);    query4.addBindValue(MyCash::get_user_id());
-    query4.exec();
-
     QSqlQuery query5; //Очищення корзини
     query5.prepare("DELETE FROM basket WHERE basket.user_id = ?");
     query5.addBindValue(MyCash::get_user_id());
@@ -211,7 +169,6 @@ void Widget::buySlot() //Слот покупки
 
     this->close();
 }
-
 
 
 

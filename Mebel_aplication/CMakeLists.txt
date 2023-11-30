@@ -27,14 +27,19 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Mebel_aplication
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        main_page.h main_page.cpp
+
         vitalikSign_up/signupwindow.h
         vitalikSign_up/signupwindow.cpp
         vitalikSign_up/signupwindow.ui
-        maratCart/widget.h
-        maratCart/widget.cpp
+        maratCart/cart.h
+        maratCart/cart.cpp
         addprod.h addprod.cpp addprod.ui
         addshop.h addshop.cpp addshop.ui
+        vitalikLog_in/loginwindow.cpp vitalikLog_in/loginwindow.h vitalikLog_in/loginwindow.ui
+        mycash.h
+        mycash.cpp
+        resources.qrc
+        vitalicAcount/acountwindow.cpp vitalicAcount/acountwindow.h vitalicAcount/acountwindow.ui
 
     )
 # Define target properties for Android with Qt 6 as:

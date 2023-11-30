@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>943</width>
     <height>403</height>
    </rect>
   </property>
@@ -15,100 +15,188 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(214, 214, 214);</string>
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Mebel</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
-          <item>
-           <widget class="QPushButton" name="login">
-            <property name="text">
-             <string>Login</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="signUp">
-            <property name="text">
-             <string>Sign up</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_6">
-            <property name="text">
-             <string>Backet</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QFrame" name="frame">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_3"/>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <widget class="QFrame" name="upframe">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="pixmap">
+            <pixmap resource="resources.qrc">:/icons/Mebel-removebg-preview.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::NoTextInteraction</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QPushButton" name="acount">
+             <property name="styleSheet">
+              <string notr="true">border: 1px solid gray;
+border-radius: 3px;
+font: 700 10pt &quot;Segoe UI&quot;;
+border:none;</string>
+             </property>
+             <property name="text">
+              <string>Acount</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="login">
+             <property name="styleSheet">
+              <string notr="true">border: 1px solid gray;
+border-radius: 3px;
+font: 700 10pt &quot;Segoe UI&quot;;
+border:none;</string>
+             </property>
+             <property name="text">
+              <string>Login</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="signUp">
+             <property name="styleSheet">
+              <string notr="true">border: 1px solid gray;
+border-radius: 3px;
+font: 700 10pt &quot;Segoe UI&quot;;
+border:none;</string>
+             </property>
+             <property name="text">
+              <string>Sign up</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="basket">
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none;</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/free-icon-shopping-cart-481384.png</normaloff>:/icons/free-icon-shopping-cart-481384.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QWidget" name="widget" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_7">
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Products</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="addProdButt">
-        <property name="text">
-         <string>Add product</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="addShopBut">
-        <property name="text">
-         <string>Add shop</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QFrame" name="frame_2">
+      <property name="styleSheet">
+       <string notr="true">background-color: #0c1f34;color: white;
+font: 700 11pt &quot;Segoe UI&quot;;
+border: 1px solid gray;
+border-radius: 3px;</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="styleSheet">
+          <string notr="true">color: white;
+font: 700 11pt &quot;Segoe UI&quot;;
+border:none;
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="text">
+          <string>Продукти</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addProdButt">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(49, 166, 116);
+border: 1px solid gray;
+border-radius: 3px;</string>
+         </property>
+         <property name="text">
+          <string>Додати продукт</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addShopBut">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(49, 166, 116);
+border: 1px solid gray;
+border-radius: 3px;</string>
+         </property>
+         <property name="text">
+          <string>Додати магазин</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_13"/>
     </item>
     <item>
      <widget class="QScrollArea" name="scrollArea">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(218, 218, 218);</string>
+      </property>
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
@@ -117,8 +205,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>580</width>
-         <height>248</height>
+         <width>923</width>
+         <height>143</height>
         </rect>
        </property>
       </widget>
@@ -131,13 +219,15 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>943</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
