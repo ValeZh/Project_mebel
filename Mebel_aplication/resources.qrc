@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/img"/>
+    <qresource prefix="/">
+        <file>icons/free-icon-shopping-cart-481384.png</file>
+        <file>icons/Mebel-removebg-preview.png</file>
+        <file>icons/Mebel.png</file>
+        <file>icons/profile_icon1.jpg</file>
+    </qresource>
+</RCC>

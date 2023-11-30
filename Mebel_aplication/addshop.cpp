@@ -29,8 +29,14 @@ void AddShop::open_bd()
 
 void AddShop::add_shop_func()
 {
+    if(ui->shopNameLD->text().isEmpty())
+    {
+        QMessageBox::critical(this, "Помилка","Пусте поле");
+        return;
+    }
+
     QSqlQuery query;
-    query.prepare("INSERT INTO shop_table (shop_name) VALUES (:shop_name)");
+    query.prepare("INSERT INTO shops (shop_name) VALUES (:shop_name)");
     std::cout<<"DB INSERT success"<<std::endl;
     query.bindValue(":shop_name", ui->shopNameLD->text());
 

@@ -1,4 +1,4 @@
-#ifndef ADDSHOP_H
+ #ifndef ADDSHOP_H
 #define ADDSHOP_H
 
 #include <QDialog>

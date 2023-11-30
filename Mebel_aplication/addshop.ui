@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Add shop</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);   </string>
+  </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
@@ -21,6 +24,11 @@
      <width>321</width>
      <height>101</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> border: 1px solid gray;
+border-radius: 3px;
+</string>
    </property>
    <property name="title">
     <string/>
@@ -44,8 +52,15 @@
       <height>16</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;
+font: 11pt &quot;Segoe UI&quot;;</string>
+    </property>
     <property name="text">
-     <string>Set shop name</string>
+     <string>Ім'я магазину</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
@@ -57,8 +72,12 @@
       <height>24</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(49, 166, 116);color: white;
+font: 700 9pt &quot;Segoe UI&quot;;</string>
+    </property>
     <property name="text">
-     <string>Add</string>
+     <string>Додати магазин</string>
     </property>
    </widget>
   </widget>

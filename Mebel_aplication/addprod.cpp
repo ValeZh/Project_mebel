@@ -2,6 +2,7 @@
 #include "ui_addprod.h"
 #include <QMessageBox>
 #include <iostream>
+#include <QDebug>
 
 
 AddProd::AddProd(QWidget *parent) :
@@ -38,7 +39,7 @@ void AddProd::shopsCBfill()
 {
     //заполнение QCombobox магазинами
     QSqlQuery query;
-    query.prepare("SELECT shop_name FROM shop_table;");
+    query.prepare("SELECT shop_name FROM shops;");
     if(query.exec())
     {
         std::cout<<"DB connection success YYYYYY"<<std::endl;
@@ -74,7 +75,7 @@ void AddProd::on_approvBut_clicked()
     //берем айди и магазина
     int id_shop;
     QSqlQuery query;
-    query.prepare("SELECT id FROM shop_table WHERE shop_name = '"  + ui->shopCb->currentText() + "'");
+    query.prepare("SELECT id FROM shops WHERE shop_name = '"  + ui->shopCb->currentText() + "'");
     if(query.exec())
     {
         std::cout<<"DB connection SHOP success"<<std::endl;
@@ -85,14 +86,14 @@ void AddProd::on_approvBut_clicked()
     }
     query.clear();
     //проверка на пустоту полей
-    if(ui->nameLd->text().isEmpty(),ui->priceLd->text().isEmpty(),ui->articulLd->text().isEmpty())
+    if(ui->nameLd->text().isEmpty(),ui->priceLd->text().isEmpty(),ui->articulLd->text().isEmpty(),image.isNull())
     {
         QMessageBox::critical(this, "Помилка","Пусте поле");
         return;
     }
 
-    //запись значений полей в бд product_table
-    query.prepare("INSERT INTO product_table (product_name,price,articul) VALUES (:product_name, :price, :articul)");
+    //запись значений полей в бд products
+    query.prepare("INSERT INTO products (product_name,price,articul) VALUES (:product_name, :price, :articul)");
     std::cout<<"DB INSERT success"<<std::endl;
     std::cout<< ui->nameLd->text().isSimpleText() <<std::endl;
 
@@ -107,24 +108,25 @@ void AddProd::on_approvBut_clicked()
     }
 
     //берем айди добавленного продукта
-    int id_prod;
+    QString prod_guid;
     query.clear();
-    query.prepare("SELECT id FROM product_table WHERE articul = '" + ui->articulLd->text() + "'");
+    query.prepare("SELECT guid FROM products WHERE articul = '" + ui->articulLd->text() + "'");
     if (query.exec())
     {
         std::cout<<"DB connection PICTURE success"<<std::endl;
         while(query.next())
         {
-            id_prod = query.value(0).toInt();
+            prod_guid = query.value(0).toString();
         }
     }
+
     query.clear();
 
     //добавляем в таблицу которая отвечает в каком магазине какой товар
-    query.prepare("INSERT INTO shop_product (id_product,id_shop,quantity) VALUES (:id_product,:id_shop,:quantity)");
+    query.prepare("INSERT INTO shop_product (product_guid,shop_id,quantity) VALUES (:product_guid,:shop_id,:quantity)");
         std::cout<<"SHOP_PRODUCT INSERT success"<<std::endl;
-        query.bindValue(":id_product",id_prod);
-        query.bindValue(":id_shop",id_shop);
+        query.bindValue(":product_guid", prod_guid);
+        query.bindValue(":shop_id",id_shop);
         query.bindValue(":quantity",ui->spinBox->value());
 
     if (query.exec())
@@ -138,7 +140,7 @@ void AddProd::on_approvBut_clicked()
     }
 
     //сохраняем картинку по пути
-    image.save("D://Learning_2kurs//Project_mebel//Mebel_aplication//pictures//" + QString::number(id_prod) + ".jpg");
+    image.save("D://Learning_2kurs//Project_mebel//Mebel_aplication//pictures//" +prod_guid  + ".jpg");
 
 }
 

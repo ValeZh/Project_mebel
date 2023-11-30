@@ -23,6 +23,7 @@ public:
     QPixmap pixmap;
     QSqlDatabase myDB;
     QImage image;
+    char shop_guid;
 
     void open_bd();
     void shopsCBfill();
